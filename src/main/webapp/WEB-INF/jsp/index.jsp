@@ -32,39 +32,31 @@
                 </div>
             </a>
 
-            <!-- Navigation Tabs -->
+            <!-- Navigation Tabs (Simple & Icon-Free) -->
             <nav class="nav-tabs">
                 <button id="nav-dashboard" class="nav-tab-btn" ng-class="{'active': currentTab === 'dashboard'}" ng-click="setTab('dashboard')">
-                    &#9783; Dashboard
+                    Dashboard
                 </button>
                 <button id="nav-claims" class="nav-tab-btn" ng-class="{'active': currentTab === 'claims'}" ng-click="setTab('claims')">
-                    &#9745; Warranty Claims
+                    Warranty Claims
                     <span class="nav-badge" ng-if="claims.length">{{ claims.length }}</span>
                 </button>
                 <button id="nav-vehicles" class="nav-tab-btn" ng-class="{'active': currentTab === 'vehicles'}" ng-click="setTab('vehicles')">
-                    &#9951; Vehicles
+                    Vehicles
                     <span class="nav-badge" ng-if="vehicles.length">{{ vehicles.length }}</span>
                 </button>
                 <button id="nav-contracts" class="nav-tab-btn" ng-class="{'active': currentTab === 'contracts'}" ng-click="setTab('contracts')">
-                    &#9776; Contracts
+                    Contracts
                     <span class="nav-badge" ng-if="contracts.length">{{ contracts.length }}</span>
                 </button>
                 <button id="nav-customers" class="nav-tab-btn" ng-class="{'active': currentTab === 'customers'}" ng-click="setTab('customers')">
-                    &#9881; Customers
+                    Customers
                     <span class="nav-badge" ng-if="customers.length">{{ customers.length }}</span>
                 </button>
             </nav>
 
-            <!-- Port / Live Status & Mobile Toggle -->
-            <div style="display: flex; align-items: center; gap: 0.6rem;">
-                <div class="nav-status">
-                    <span class="status-dot"></span>
-                    <span>Live :8030</span>
-                    <button class="btn btn-ghost btn-sm" ng-click="loadAll()" title="Reload All Data" style="margin-left: 0.35rem; padding: 0.15rem 0.45rem;">
-                        &#8635;
-                    </button>
-                </div>
-
+            <!-- Mobile Toggle -->
+            <div class="nav-actions" style="display: flex; align-items: center;">
                 <!-- Mobile Hamburger Toggle -->
                 <button class="mobile-menu-btn" ng-click="toggleMobileMenu()" id="btn-mobile-toggle" aria-label="Toggle Navigation">
                     <span class="bar"></span>
@@ -77,22 +69,22 @@
         <!-- Mobile Collapsible Navigation Drawer -->
         <div class="mobile-nav-drawer" ng-show="mobileMenuOpen">
             <button class="mobile-drawer-btn" ng-class="{'active': currentTab === 'dashboard'}" ng-click="setTab('dashboard')">
-                <span>&#9783; Dashboard Overview</span>
+                <span>Dashboard Overview</span>
             </button>
             <button class="mobile-drawer-btn" ng-class="{'active': currentTab === 'claims'}" ng-click="setTab('claims')">
-                <span>&#9745; Warranty Claims</span>
+                <span>Warranty Claims</span>
                 <span class="nav-badge" ng-if="claims.length">{{ claims.length }}</span>
             </button>
             <button class="mobile-drawer-btn" ng-class="{'active': currentTab === 'vehicles'}" ng-click="setTab('vehicles')">
-                <span>&#9951; Vehicle Fleet</span>
+                <span>Vehicle Fleet</span>
                 <span class="nav-badge" ng-if="vehicles.length">{{ vehicles.length }}</span>
             </button>
             <button class="mobile-drawer-btn" ng-class="{'active': currentTab === 'contracts'}" ng-click="setTab('contracts')">
-                <span>&#9776; Finance Contracts</span>
+                <span>Finance Contracts</span>
                 <span class="nav-badge" ng-if="contracts.length">{{ contracts.length }}</span>
             </button>
             <button class="mobile-drawer-btn" ng-class="{'active': currentTab === 'customers'}" ng-click="setTab('customers')">
-                <span>&#9881; Customer Registry</span>
+                <span>Customer Registry</span>
                 <span class="nav-badge" ng-if="customers.length">{{ customers.length }}</span>
             </button>
             <div style="padding: 0.75rem 0.5rem 0.25rem 0.5rem; display: flex; gap: 0.5rem;">
@@ -387,7 +379,7 @@
                                 <td><span class="badge-id" style="color: var(--secondary);">{{ veh.vin }}</span></td>
                                 <td><b>{{ veh.make }}</b> {{ veh.model }}</td>
                                 <td>{{ veh.year }}</td>
-                                <td><span class="badge" style="background: rgba(255,255,255,0.06);">{{ veh.licensePlate || 'N/A' }}</span></td>
+                                <td><span class="badge" style="background: var(--bg-subtle); color: var(--text-main); border: 1px solid var(--border-subtle);">{{ veh.licensePlate || 'N/A' }}</span></td>
                                 <td>{{ veh.mileage | number }} miles</td>
                                 <td>
                                     <div><b>{{ veh.ownerName || ('Cust #' + veh.customerId) }}</b></div>
@@ -451,7 +443,7 @@
                         </thead>
                         <tbody>
                             <tr ng-repeat="con in contracts | filter:contractSearch">
-                                <td><span class="badge-id" style="color: #a78bfa;">{{ con.contractNumber }}</span></td>
+                                <td><span class="badge-id">{{ con.contractNumber }}</span></td>
                                 <td>
                                     <div><b>{{ con.customerName || ('Cust #' + con.customerId) }}</b></div>
                                     <small style="color: var(--text-dim);">{{ con.vehicleInfo || ('Veh #' + con.vehicleId) }}</small>
@@ -460,7 +452,7 @@
                                 <td>{{ con.downPayment | currency }}</td>
                                 <td>{{ con.interestRate }}%</td>
                                 <td>{{ con.termMonths }} mo</td>
-                                <td><b style="color: #34d399;">{{ con.monthlyPayment | currency }}</b></td>
+                                <td><b style="color: var(--success); font-weight: 700;">{{ con.monthlyPayment | currency }}</b></td>
                                 <td>
                                     <span class="badge badge-active">{{ con.status || 'ACTIVE' }}</span>
                                 </td>
