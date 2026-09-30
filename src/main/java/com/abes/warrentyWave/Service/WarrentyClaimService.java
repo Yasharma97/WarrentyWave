@@ -1,17 +1,21 @@
 package com.abes.warrentyWave.Service;
 
-import com.abes.warrentyWave.entity.WarrantyClaim;
+import com.abes.warrentyWave.dto.ClaimStatusUpdateDTO;
+import com.abes.warrentyWave.dto.WarrantyClaimRequestDTO;
+import com.abes.warrentyWave.dto.WarrantyClaimResponseDTO;
 import java.util.List;
 
 public interface WarrentyClaimService {
 
-    WarrantyClaim createClaim(WarrantyClaim claim);
+    WarrantyClaimResponseDTO createClaim(WarrantyClaimRequestDTO claimRequest);
 
-    WarrantyClaim getClaimById(Long id);
+    WarrantyClaimResponseDTO getClaimById(Long id);
 
-    List<WarrantyClaim> getAllClaims();
+    List<WarrantyClaimResponseDTO> getAllClaims();
 
-    WarrantyClaim updateClaimStatus(Long id, String status);
+    WarrantyClaimResponseDTO updateClaimStatus(Long id, String status);
+
+    WarrantyClaimResponseDTO updateClaimStatus(Long id, ClaimStatusUpdateDTO statusDto);
 
     void deleteClaim(Long id);
 }

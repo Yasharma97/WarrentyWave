@@ -1,7 +1,8 @@
 package com.abes.warrentyWave.controller;
 
 import com.abes.warrentyWave.Service.FinanceService;
-import com.abes.warrentyWave.entity.FinanceContract;
+import com.abes.warrentyWave.dto.FinanceContractRequestDTO;
+import com.abes.warrentyWave.dto.FinanceContractResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,32 +21,32 @@ public class FinanceContractController {
     }
 
     @PostMapping
-    public FinanceContract createContract(@RequestBody FinanceContract contract) {
+    public FinanceContractResponseDTO createContract(@RequestBody FinanceContractRequestDTO contract) {
         return financeService.createContract(contract);
     }
 
     @GetMapping
-    public List<FinanceContract> getAllContracts() {
+    public List<FinanceContractResponseDTO> getAllContracts() {
         return financeService.getAllContracts();
     }
 
     @GetMapping("/{id}")
-    public FinanceContract getContractById(@PathVariable Long id) {
+    public FinanceContractResponseDTO getContractById(@PathVariable Long id) {
         return financeService.getContractById(id);
     }
 
     @GetMapping("/contract-number/{contractNumber}")
-    public Optional<FinanceContract> getContractByNumber(@PathVariable String contractNumber) {
+    public Optional<FinanceContractResponseDTO> getContractByNumber(@PathVariable String contractNumber) {
         return financeService.getContractByNumber(contractNumber);
     }
 
     @GetMapping("/customer/{customerId}")
-    public List<FinanceContract> getContractsByCustomerId(@PathVariable Long customerId) {
+    public List<FinanceContractResponseDTO> getContractsByCustomerId(@PathVariable Long customerId) {
         return financeService.getContractsByCustomerId(customerId);
     }
 
     @GetMapping("/vehicle/{vehicleId}")
-    public List<FinanceContract> getContractsByVehicleId(@PathVariable Long vehicleId) {
+    public List<FinanceContractResponseDTO> getContractsByVehicleId(@PathVariable Long vehicleId) {
         return financeService.getContractsByVehicleId(vehicleId);
     }
 

@@ -1,11 +1,13 @@
 package com.abes.warrentyWave.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
  * Request DTO for creating or updating a finance contract.
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class FinanceContractRequestDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -20,6 +22,7 @@ public class FinanceContractRequestDTO implements Serializable {
     private Double monthlyPayment;
     private LocalDate startDate;
     private LocalDate endDate;
+    private String status;
 
     // Default Constructor
     public FinanceContractRequestDTO() {
@@ -29,7 +32,7 @@ public class FinanceContractRequestDTO implements Serializable {
     public FinanceContractRequestDTO(String contractNumber, Long customerId, Long vehicleId,
                                     Double loanAmount, Double downPayment, Double interestRate,
                                     Integer termMonths, Double monthlyPayment,
-                                    LocalDate startDate, LocalDate endDate) {
+                                    LocalDate startDate, LocalDate endDate, String status) {
         this.contractNumber = contractNumber;
         this.customerId = customerId;
         this.vehicleId = vehicleId;
@@ -40,6 +43,7 @@ public class FinanceContractRequestDTO implements Serializable {
         this.monthlyPayment = monthlyPayment;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.status = status;
     }
 
     // Getters and Setters
@@ -123,6 +127,14 @@ public class FinanceContractRequestDTO implements Serializable {
         this.endDate = endDate;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "FinanceContractRequestDTO{" +
@@ -136,6 +148,7 @@ public class FinanceContractRequestDTO implements Serializable {
                 ", monthlyPayment=" + monthlyPayment +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
+                ", status='" + status + '\'' +
                 '}';
     }
 }

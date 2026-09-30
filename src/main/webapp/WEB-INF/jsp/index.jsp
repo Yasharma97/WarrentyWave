@@ -206,8 +206,8 @@
                                 <td><span class="badge-id">&#35;{{ claim.id }}</span></td>
                                 <td>{{ claim.claimDate || 'N/A' }}</td>
                                 <td>
-                                    <div><b>Veh &#35;{{ claim.vehicleId }}</b></div>
-                                    <small style="color: var(--text-dim);">Contract &#35;{{ claim.contractId }}</small>
+                                    <div><b>{{ claim.vehicleInfo || ('Veh #' + claim.vehicleId) }}</b></div>
+                                    <small style="color: var(--text-dim);">{{ claim.customerName || ('Cust #' + claim.customerId) }}</small>
                                 </td>
                                 <td><b>{{ claim.claimAmount | currency }}</b></td>
                                 <td>
@@ -283,9 +283,9 @@
                         <thead>
                             <tr>
                                 <th>Claim ID</th>
-                                <th>Customer ID</th>
-                                <th>Vehicle ID</th>
-                                <th>Contract ID</th>
+                                <th>Customer</th>
+                                <th>Vehicle</th>
+                                <th>Contract #</th>
                                 <th>Date</th>
                                 <th>Amount</th>
                                 <th>Status</th>
@@ -296,8 +296,14 @@
                         <tbody>
                             <tr ng-repeat="claim in claims | filter:claimSearch | filter:filterClaimsByStatus">
                                 <td><span class="badge-id">&#35;{{ claim.id }}</span></td>
-                                <td>Cust &#35;{{ claim.customerId }}</td>
-                                <td>Veh &#35;{{ claim.vehicleId }}</td>
+                                <td>
+                                    <div><b>{{ claim.customerName || ('Cust #' + claim.customerId) }}</b></div>
+                                    <small style="color: var(--text-dim);" ng-if="claim.customerId">ID &#35;{{ claim.customerId }}</small>
+                                </td>
+                                <td>
+                                    <div><b>{{ claim.vehicleInfo || ('Veh #' + claim.vehicleId) }}</b></div>
+                                    <small style="color: var(--text-dim);" ng-if="claim.vehicleId">ID &#35;{{ claim.vehicleId }}</small>
+                                </td>
                                 <td>Con &#35;{{ claim.contractId }}</td>
                                 <td>{{ claim.claimDate }}</td>
                                 <td><b>{{ claim.claimAmount | currency }}</b></td>
@@ -371,7 +377,7 @@
                                 <th>Year</th>
                                 <th>License Plate</th>
                                 <th>Mileage</th>
-                                <th>Owner (Customer ID)</th>
+                                <th>Registered Owner</th>
                                 <th style="text-align: right;">Action</th>
                             </tr>
                         </thead>
@@ -383,7 +389,10 @@
                                 <td>{{ veh.year }}</td>
                                 <td><span class="badge" style="background: rgba(255,255,255,0.06);">{{ veh.licensePlate || 'N/A' }}</span></td>
                                 <td>{{ veh.mileage | number }} miles</td>
-                                <td>Cust &#35;{{ veh.customerId || 'N/A' }}</td>
+                                <td>
+                                    <div><b>{{ veh.ownerName || ('Cust #' + veh.customerId) }}</b></div>
+                                    <small style="color: var(--text-dim);" ng-if="veh.customerId">ID &#35;{{ veh.customerId }}</small>
+                                </td>
                                 <td style="text-align: right;">
                                     <button class="btn btn-ghost btn-sm" ng-click="deleteVehicle(veh.id)" style="color: var(--danger);">
                                         &#128465; Delete
@@ -444,8 +453,8 @@
                             <tr ng-repeat="con in contracts | filter:contractSearch">
                                 <td><span class="badge-id" style="color: #a78bfa;">{{ con.contractNumber }}</span></td>
                                 <td>
-                                    <div>Cust &#35;{{ con.customerId }}</div>
-                                    <small style="color: var(--text-dim);">Veh &#35;{{ con.vehicleId }}</small>
+                                    <div><b>{{ con.customerName || ('Cust #' + con.customerId) }}</b></div>
+                                    <small style="color: var(--text-dim);">{{ con.vehicleInfo || ('Veh #' + con.vehicleId) }}</small>
                                 </td>
                                 <td><b>{{ con.loanAmount | currency }}</b></td>
                                 <td>{{ con.downPayment | currency }}</td>

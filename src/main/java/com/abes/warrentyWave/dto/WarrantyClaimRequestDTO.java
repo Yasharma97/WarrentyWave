@@ -1,11 +1,13 @@
 package com.abes.warrentyWave.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
  * Request DTO for submitting or updating a Warranty Claim.
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class WarrantyClaimRequestDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -14,6 +16,7 @@ public class WarrantyClaimRequestDTO implements Serializable {
     private Long vehicleId;
     private Long contractId;
     private LocalDate claimDate;
+    private String status;
     private String description;
     private Double claimAmount;
     private String remarks;
@@ -24,12 +27,13 @@ public class WarrantyClaimRequestDTO implements Serializable {
 
     // Parameterized Constructor
     public WarrantyClaimRequestDTO(Long customerId, Long vehicleId, Long contractId,
-                                  LocalDate claimDate, String description,
+                                  LocalDate claimDate, String status, String description,
                                   Double claimAmount, String remarks) {
         this.customerId = customerId;
         this.vehicleId = vehicleId;
         this.contractId = contractId;
         this.claimDate = claimDate;
+        this.status = status;
         this.description = description;
         this.claimAmount = claimAmount;
         this.remarks = remarks;
@@ -68,6 +72,14 @@ public class WarrantyClaimRequestDTO implements Serializable {
         this.claimDate = claimDate;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -99,6 +111,7 @@ public class WarrantyClaimRequestDTO implements Serializable {
                 ", vehicleId=" + vehicleId +
                 ", contractId=" + contractId +
                 ", claimDate=" + claimDate +
+                ", status='" + status + '\'' +
                 ", description='" + description + '\'' +
                 ", claimAmount=" + claimAmount +
                 ", remarks='" + remarks + '\'' +

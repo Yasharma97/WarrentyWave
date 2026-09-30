@@ -1,21 +1,22 @@
 package com.abes.warrentyWave.Service;
 
-import com.abes.warrentyWave.entity.Vehicle;
+import com.abes.warrentyWave.dto.VehicleRequestDTO;
+import com.abes.warrentyWave.dto.VehicleResponseDTO;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface VehicleService {
 
-    Vehicle registerVehicle(Vehicle vehicle);
+    VehicleResponseDTO registerVehicle(VehicleRequestDTO vehicleRequest);
 
-    List<Vehicle> getAllVehicles();
+    List<VehicleResponseDTO> getAllVehicles();
 
-    Vehicle getVehicleById(Long id);
+    VehicleResponseDTO getVehicleById(Long id);
 
-    Optional<Vehicle> getVehicleByVin(String vin);
+    Optional<VehicleResponseDTO> getVehicleByVin(String vin);
 
-    List<Vehicle> getVehiclesByCustomerId(Long customerId);
+    List<VehicleResponseDTO> getVehiclesByCustomerId(Long customerId);
 
     void deleteVehicle(Long id);
 }
