@@ -1,17 +1,13 @@
-package com.abes.warrentyWave.entity;
+package com.abes.warrentyWave.dto;
 
-import jakarta.persistence.*;
 import java.io.Serializable;
 
-@Entity
-@Table(name = "customers")
-public class Customer implements Serializable {
+/**
+ * Request DTO for creating or updating a customer.
+ */
+public class CustomerRequestDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
     private String firstName;
     private String lastName;
@@ -22,13 +18,14 @@ public class Customer implements Serializable {
     private String state;
     private String zipCode;
 
-    public Customer() {
+    // Default Constructor
+    public CustomerRequestDTO() {
     }
 
-    public Customer(Long id, String firstName, String lastName, String email,
-                    String phoneNumber, String address, String city,
-                    String state, String zipCode) {
-        this.id = id;
+    // Parameterized Constructor
+    public CustomerRequestDTO(String firstName, String lastName, String email,
+                              String phoneNumber, String address, String city,
+                              String state, String zipCode) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -39,14 +36,7 @@ public class Customer implements Serializable {
         this.zipCode = zipCode;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
+    // Getters and Setters
     public String getFirstName() {
         return firstName;
     }
@@ -113,9 +103,8 @@ public class Customer implements Serializable {
 
     @Override
     public String toString() {
-        return "Customer{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
+        return "CustomerRequestDTO{" +
+                "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +

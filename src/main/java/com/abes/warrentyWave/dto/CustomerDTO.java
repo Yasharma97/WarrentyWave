@@ -1,18 +1,16 @@
-package com.abes.warrentyWave.entity;
+package com.abes.warrentyWave.dto;
 
-import jakarta.persistence.*;
 import java.io.Serializable;
 
-@Entity
-@Table(name = "customers")
-public class Customer implements Serializable {
+/**
+ * Data Transfer Object for Customer.
+ * Represents customer profile information transferred across API endpoints.
+ */
+public class CustomerDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String firstName;
     private String lastName;
     private String email;
@@ -22,12 +20,14 @@ public class Customer implements Serializable {
     private String state;
     private String zipCode;
 
-    public Customer() {
+    // Default Constructor
+    public CustomerDTO() {
     }
 
-    public Customer(Long id, String firstName, String lastName, String email,
-                    String phoneNumber, String address, String city,
-                    String state, String zipCode) {
+    // Parameterized Constructor
+    public CustomerDTO(Long id, String firstName, String lastName, String email,
+                       String phoneNumber, String address, String city,
+                       String state, String zipCode) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -39,6 +39,7 @@ public class Customer implements Serializable {
         this.zipCode = zipCode;
     }
 
+    // Getters and Setters
     public Long getId() {
         return id;
     }
@@ -113,7 +114,7 @@ public class Customer implements Serializable {
 
     @Override
     public String toString() {
-        return "Customer{" +
+        return "CustomerDTO{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +

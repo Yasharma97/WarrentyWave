@@ -1,35 +1,34 @@
-package com.abes.warrentyWave.entity;
+package com.abes.warrentyWave.dto;
 
-import jakarta.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "warranty_claims")
-public class WarrantyClaim implements Serializable {
+/**
+ * Data Transfer Object for Warranty Claim.
+ * Used for transferring warranty claim data between client and server layers.
+ */
+public class WarrantyClaimDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private Long customerId;
     private Long vehicleId;
     private Long contractId;
-
     private LocalDate claimDate;
-    private String status;
+    private String status;       // PENDING, APPROVED, REJECTED, IN_REVIEW
     private String description;
     private Double claimAmount;
     private String remarks;
 
-    public WarrantyClaim() {
+    // Default Constructor
+    public WarrantyClaimDTO() {
     }
 
-    public WarrantyClaim(Long id, Long customerId, Long vehicleId, Long contractId,
-                         LocalDate claimDate, String status, String description,
-                         Double claimAmount, String remarks) {
+    // Parameterized Constructor
+    public WarrantyClaimDTO(Long id, Long customerId, Long vehicleId, Long contractId,
+                            LocalDate claimDate, String status, String description,
+                            Double claimAmount, String remarks) {
         this.id = id;
         this.customerId = customerId;
         this.vehicleId = vehicleId;
@@ -41,6 +40,7 @@ public class WarrantyClaim implements Serializable {
         this.remarks = remarks;
     }
 
+    // Getters and Setters
     public Long getId() {
         return id;
     }
@@ -115,7 +115,7 @@ public class WarrantyClaim implements Serializable {
 
     @Override
     public String toString() {
-        return "WarrantyClaim{" +
+        return "WarrantyClaimDTO{" +
                 "id=" + id +
                 ", customerId=" + customerId +
                 ", vehicleId=" + vehicleId +

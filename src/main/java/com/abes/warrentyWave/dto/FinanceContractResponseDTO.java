@@ -1,48 +1,50 @@
-package com.abes.warrentyWave.entity;
+package com.abes.warrentyWave.dto;
 
-import jakarta.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "finance_contracts")
-public class FinanceContract implements Serializable {
+/**
+ * Response DTO for returning Finance Contract details to clients.
+ */
+public class FinanceContractResponseDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(unique = true, nullable = false)
     private String contractNumber;
-
     private Long customerId;
+    private String customerName;
     private Long vehicleId;
-
+    private String vehicleInfo;
     private Double loanAmount;
     private Double downPayment;
+    private Double financedAmount;
     private Double interestRate;
     private Integer termMonths;
     private Double monthlyPayment;
-
     private LocalDate startDate;
     private LocalDate endDate;
     private String status;
 
-    public FinanceContract() {
+    // Default Constructor
+    public FinanceContractResponseDTO() {
     }
 
-    public FinanceContract(Long id, String contractNumber, Long customerId, Long vehicleId,
-                           Double loanAmount, Double downPayment, Double interestRate,
-                           Integer termMonths, Double monthlyPayment, LocalDate startDate,
-                           LocalDate endDate, String status) {
+    // Parameterized Constructor
+    public FinanceContractResponseDTO(Long id, String contractNumber, Long customerId,
+                                     String customerName, Long vehicleId, String vehicleInfo,
+                                     Double loanAmount, Double downPayment, Double financedAmount,
+                                     Double interestRate, Integer termMonths, Double monthlyPayment,
+                                     LocalDate startDate, LocalDate endDate, String status) {
         this.id = id;
         this.contractNumber = contractNumber;
         this.customerId = customerId;
+        this.customerName = customerName;
         this.vehicleId = vehicleId;
+        this.vehicleInfo = vehicleInfo;
         this.loanAmount = loanAmount;
         this.downPayment = downPayment;
+        this.financedAmount = financedAmount;
         this.interestRate = interestRate;
         this.termMonths = termMonths;
         this.monthlyPayment = monthlyPayment;
@@ -51,6 +53,7 @@ public class FinanceContract implements Serializable {
         this.status = status;
     }
 
+    // Getters and Setters
     public Long getId() {
         return id;
     }
@@ -75,12 +78,28 @@ public class FinanceContract implements Serializable {
         this.customerId = customerId;
     }
 
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
     public Long getVehicleId() {
         return vehicleId;
     }
 
     public void setVehicleId(Long vehicleId) {
         this.vehicleId = vehicleId;
+    }
+
+    public String getVehicleInfo() {
+        return vehicleInfo;
+    }
+
+    public void setVehicleInfo(String vehicleInfo) {
+        this.vehicleInfo = vehicleInfo;
     }
 
     public Double getLoanAmount() {
@@ -97,6 +116,17 @@ public class FinanceContract implements Serializable {
 
     public void setDownPayment(Double downPayment) {
         this.downPayment = downPayment;
+    }
+
+    public Double getFinancedAmount() {
+        if (financedAmount == null && loanAmount != null && downPayment != null) {
+            return loanAmount - downPayment;
+        }
+        return financedAmount;
+    }
+
+    public void setFinancedAmount(Double financedAmount) {
+        this.financedAmount = financedAmount;
     }
 
     public Double getInterestRate() {
@@ -149,13 +179,16 @@ public class FinanceContract implements Serializable {
 
     @Override
     public String toString() {
-        return "FinanceContract{" +
+        return "FinanceContractResponseDTO{" +
                 "id=" + id +
                 ", contractNumber='" + contractNumber + '\'' +
                 ", customerId=" + customerId +
+                ", customerName='" + customerName + '\'' +
                 ", vehicleId=" + vehicleId +
+                ", vehicleInfo='" + vehicleInfo + '\'' +
                 ", loanAmount=" + loanAmount +
                 ", downPayment=" + downPayment +
+                ", financedAmount=" + getFinancedAmount() +
                 ", interestRate=" + interestRate +
                 ", termMonths=" + termMonths +
                 ", monthlyPayment=" + monthlyPayment +

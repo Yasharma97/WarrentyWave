@@ -1,54 +1,41 @@
-package com.abes.warrentyWave.entity;
+package com.abes.warrentyWave.dto;
 
-import jakarta.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "warranty_claims")
-public class WarrantyClaim implements Serializable {
+/**
+ * Request DTO for submitting or updating a Warranty Claim.
+ */
+public class WarrantyClaimRequestDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
     private Long customerId;
     private Long vehicleId;
     private Long contractId;
-
     private LocalDate claimDate;
-    private String status;
     private String description;
     private Double claimAmount;
     private String remarks;
 
-    public WarrantyClaim() {
+    // Default Constructor
+    public WarrantyClaimRequestDTO() {
     }
 
-    public WarrantyClaim(Long id, Long customerId, Long vehicleId, Long contractId,
-                         LocalDate claimDate, String status, String description,
-                         Double claimAmount, String remarks) {
-        this.id = id;
+    // Parameterized Constructor
+    public WarrantyClaimRequestDTO(Long customerId, Long vehicleId, Long contractId,
+                                  LocalDate claimDate, String description,
+                                  Double claimAmount, String remarks) {
         this.customerId = customerId;
         this.vehicleId = vehicleId;
         this.contractId = contractId;
         this.claimDate = claimDate;
-        this.status = status;
         this.description = description;
         this.claimAmount = claimAmount;
         this.remarks = remarks;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
+    // Getters and Setters
     public Long getCustomerId() {
         return customerId;
     }
@@ -81,14 +68,6 @@ public class WarrantyClaim implements Serializable {
         this.claimDate = claimDate;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -115,13 +94,11 @@ public class WarrantyClaim implements Serializable {
 
     @Override
     public String toString() {
-        return "WarrantyClaim{" +
-                "id=" + id +
-                ", customerId=" + customerId +
+        return "WarrantyClaimRequestDTO{" +
+                "customerId=" + customerId +
                 ", vehicleId=" + vehicleId +
                 ", contractId=" + contractId +
                 ", claimDate=" + claimDate +
-                ", status='" + status + '\'' +
                 ", description='" + description + '\'' +
                 ", claimAmount=" + claimAmount +
                 ", remarks='" + remarks + '\'' +

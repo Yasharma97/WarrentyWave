@@ -1,42 +1,38 @@
-package com.abes.warrentyWave.entity;
+package com.abes.warrentyWave.dto;
 
-import jakarta.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "finance_contracts")
-public class FinanceContract implements Serializable {
+/**
+ * Data Transfer Object for Finance Contract.
+ * Encapsulates financing agreement terms, payments, and statuses.
+ */
+public class FinanceContractDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(unique = true, nullable = false)
     private String contractNumber;
-
     private Long customerId;
     private Long vehicleId;
-
     private Double loanAmount;
     private Double downPayment;
     private Double interestRate;
     private Integer termMonths;
     private Double monthlyPayment;
-
     private LocalDate startDate;
     private LocalDate endDate;
-    private String status;
+    private String status; // ACTIVE, PENDING, COMPLETED, TERMINATED
 
-    public FinanceContract() {
+    // Default Constructor
+    public FinanceContractDTO() {
     }
 
-    public FinanceContract(Long id, String contractNumber, Long customerId, Long vehicleId,
-                           Double loanAmount, Double downPayment, Double interestRate,
-                           Integer termMonths, Double monthlyPayment, LocalDate startDate,
-                           LocalDate endDate, String status) {
+    // Parameterized Constructor
+    public FinanceContractDTO(Long id, String contractNumber, Long customerId, Long vehicleId,
+                              Double loanAmount, Double downPayment, Double interestRate,
+                              Integer termMonths, Double monthlyPayment, LocalDate startDate,
+                              LocalDate endDate, String status) {
         this.id = id;
         this.contractNumber = contractNumber;
         this.customerId = customerId;
@@ -51,6 +47,7 @@ public class FinanceContract implements Serializable {
         this.status = status;
     }
 
+    // Getters and Setters
     public Long getId() {
         return id;
     }
@@ -149,7 +146,7 @@ public class FinanceContract implements Serializable {
 
     @Override
     public String toString() {
-        return "FinanceContract{" +
+        return "FinanceContractDTO{" +
                 "id=" + id +
                 ", contractNumber='" + contractNumber + '\'' +
                 ", customerId=" + customerId +
