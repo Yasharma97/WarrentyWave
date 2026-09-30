@@ -1,6 +1,14 @@
 package com.abes.warrentyWave.mapper;
 
-import com.abes.warrentyWave.dto.*;
+import com.abes.warrentyWave.dto.ClaimStatusUpdateDTO;
+import com.abes.warrentyWave.dto.CustomerRequestDTO;
+import com.abes.warrentyWave.dto.CustomerResponseDTO;
+import com.abes.warrentyWave.dto.FinanceContractRequestDTO;
+import com.abes.warrentyWave.dto.FinanceContractResponseDTO;
+import com.abes.warrentyWave.dto.VehicleRequestDTO;
+import com.abes.warrentyWave.dto.VehicleResponseDTO;
+import com.abes.warrentyWave.dto.WarrantyClaimRequestDTO;
+import com.abes.warrentyWave.dto.WarrantyClaimResponseDTO;
 import com.abes.warrentyWave.entity.Customer;
 import com.abes.warrentyWave.entity.FinanceContract;
 import com.abes.warrentyWave.entity.Vehicle;
@@ -10,6 +18,8 @@ import com.abes.warrentyWave.repository.FinanceContractRepository;
 import com.abes.warrentyWave.repository.VehicleRepositoy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.Optional;
 
 @Component
 public class EntityDtoMapper {
@@ -27,18 +37,23 @@ public class EntityDtoMapper {
         this.financeContractRepository = financeContractRepository;
     }
 
-    // ==========================================
-    // WARRANTY CLAIM MAPPINGS
-    // ==========================================
-
     public WarrantyClaim toEntity(WarrantyClaimRequestDTO dto) {
-        if (dto == null) return null;
+        if (dto == null) {
+            return null;
+        }
         WarrantyClaim claim = new WarrantyClaim();
         claim.setCustomerId(dto.getCustomerId());
         claim.setVehicleId(dto.getVehicleId());
         claim.setContractId(dto.getContractId());
         claim.setClaimDate(dto.getClaimDate());
-        claim.setStatus(dto.getStatus() != null && !dto.getStatus().isBlank() ? dto.getStatus() : "Submitted");
+
+        String status = dto.getStatus();
+        if (status == null || status.trim().isEmpty()) {
+            claim.setStatus("Submitted");
+        } else {
+            claim.setStatus(status.trim());
+        }
+
         claim.setDescription(dto.getDescription());
         claim.setClaimAmount(dto.getClaimAmount());
         claim.setRemarks(dto.getRemarks());
@@ -46,25 +61,45 @@ public class EntityDtoMapper {
     }
 
     public WarrantyClaimResponseDTO toResponseDTO(WarrantyClaim claim) {
-        if (claim == null) return null;
+        if (claim == null) {
+            return null;
+        }
 
         String customerName = "N/A";
         if (claim.getCustomerId() != null) {
-            customerName = customerRepository.findById(claim.getCustomerId())
-                    .map(c -> (c.getFirstName() != null ? c.getFirstName() : "") + " " + (c.getLastName() != null ? c.getLastName() : ""))
-                    .map(String::trim)
-                    .orElse("Cust #" + claim.getCustomerId());
+            Optional<Customer> custOpt = customerRepository.findById(claim.getCustomerId());
+            if (custOpt.isPresent()) {
+                Customer c = custOpt.get();
+                String first = c.getFirstName() != null ? c.getFirstName() : "";
+                String last = c.getLastName() != null ? c.getLastName() : "";
+                customerName = (first + " " + last).trim();
+            } else {
+                customerName = "Cust #" + claim.getCustomerId();
+            }
         }
 
         String vehicleInfo = "N/A";
         if (claim.getVehicleId() != null) {
-            vehicleInfo = vehicleRepository.findById(claim.getVehicleId())
-                    .map(v -> (v.getYear() != null ? v.getYear() + " " : "") +
-                              (v.getMake() != null ? v.getMake() + " " : "") +
-                              (v.getModel() != null ? v.getModel() : "") +
-                              (v.getVin() != null ? " (" + v.getVin() + ")" : ""))
-                    .map(String::trim)
-                    .orElse("Veh #" + claim.getVehicleId());
+            Optional<Vehicle> vehOpt = vehicleRepository.findById(claim.getVehicleId());
+            if (vehOpt.isPresent()) {
+                Vehicle v = vehOpt.get();
+                StringBuilder sb = new StringBuilder();
+                if (v.getYear() != null) {
+                    sb.append(v.getYear()).append(" ");
+                }
+                if (v.getMake() != null) {
+                    sb.append(v.getMake()).append(" ");
+                }
+                if (v.getModel() != null) {
+                    sb.append(v.getModel());
+                }
+                if (v.getVin() != null) {
+                    sb.append(" (").append(v.getVin()).append(")");
+                }
+                vehicleInfo = sb.toString().trim();
+            } else {
+                vehicleInfo = "Veh #" + claim.getVehicleId();
+            }
         }
 
         WarrantyClaimResponseDTO responseDTO = new WarrantyClaimResponseDTO();
@@ -82,12 +117,10 @@ public class EntityDtoMapper {
         return responseDTO;
     }
 
-    // ==========================================
-    // VEHICLE MAPPINGS
-    // ==========================================
-
     public Vehicle toEntity(VehicleRequestDTO dto) {
-        if (dto == null) return null;
+        if (dto == null) {
+            return null;
+        }
         Vehicle vehicle = new Vehicle();
         vehicle.setVin(dto.getVin());
         vehicle.setMake(dto.getMake());
@@ -100,14 +133,21 @@ public class EntityDtoMapper {
     }
 
     public VehicleResponseDTO toResponseDTO(Vehicle vehicle) {
-        if (vehicle == null) return null;
+        if (vehicle == null) {
+            return null;
+        }
 
         String ownerName = "Unassigned";
         if (vehicle.getCustomerId() != null) {
-            ownerName = customerRepository.findById(vehicle.getCustomerId())
-                    .map(c -> (c.getFirstName() != null ? c.getFirstName() : "") + " " + (c.getLastName() != null ? c.getLastName() : ""))
-                    .map(String::trim)
-                    .orElse("Cust #" + vehicle.getCustomerId());
+            Optional<Customer> custOpt = customerRepository.findById(vehicle.getCustomerId());
+            if (custOpt.isPresent()) {
+                Customer c = custOpt.get();
+                String first = c.getFirstName() != null ? c.getFirstName() : "";
+                String last = c.getLastName() != null ? c.getLastName() : "";
+                ownerName = (first + " " + last).trim();
+            } else {
+                ownerName = "Cust #" + vehicle.getCustomerId();
+            }
         }
 
         VehicleResponseDTO responseDTO = new VehicleResponseDTO();
@@ -123,12 +163,10 @@ public class EntityDtoMapper {
         return responseDTO;
     }
 
-    // ==========================================
-    // FINANCE CONTRACT MAPPINGS
-    // ==========================================
-
     public FinanceContract toEntity(FinanceContractRequestDTO dto) {
-        if (dto == null) return null;
+        if (dto == null) {
+            return null;
+        }
         FinanceContract contract = new FinanceContract();
         contract.setContractNumber(dto.getContractNumber());
         contract.setCustomerId(dto.getCustomerId());
@@ -140,29 +178,54 @@ public class EntityDtoMapper {
         contract.setMonthlyPayment(dto.getMonthlyPayment());
         contract.setStartDate(dto.getStartDate());
         contract.setEndDate(dto.getEndDate());
-        contract.setStatus(dto.getStatus() != null && !dto.getStatus().isBlank() ? dto.getStatus() : "ACTIVE");
+
+        String status = dto.getStatus();
+        if (status == null || status.trim().isEmpty()) {
+            contract.setStatus("ACTIVE");
+        } else {
+            contract.setStatus(status.trim());
+        }
+
         return contract;
     }
 
     public FinanceContractResponseDTO toResponseDTO(FinanceContract contract) {
-        if (contract == null) return null;
+        if (contract == null) {
+            return null;
+        }
 
         String customerName = "N/A";
         if (contract.getCustomerId() != null) {
-            customerName = customerRepository.findById(contract.getCustomerId())
-                    .map(c -> (c.getFirstName() != null ? c.getFirstName() : "") + " " + (c.getLastName() != null ? c.getLastName() : ""))
-                    .map(String::trim)
-                    .orElse("Cust #" + contract.getCustomerId());
+            Optional<Customer> custOpt = customerRepository.findById(contract.getCustomerId());
+            if (custOpt.isPresent()) {
+                Customer c = custOpt.get();
+                String first = c.getFirstName() != null ? c.getFirstName() : "";
+                String last = c.getLastName() != null ? c.getLastName() : "";
+                customerName = (first + " " + last).trim();
+            } else {
+                customerName = "Cust #" + contract.getCustomerId();
+            }
         }
 
         String vehicleInfo = "N/A";
         if (contract.getVehicleId() != null) {
-            vehicleInfo = vehicleRepository.findById(contract.getVehicleId())
-                    .map(v -> (v.getYear() != null ? v.getYear() + " " : "") +
-                              (v.getMake() != null ? v.getMake() + " " : "") +
-                              (v.getModel() != null ? v.getModel() : ""))
-                    .map(String::trim)
-                    .orElse("Veh #" + contract.getVehicleId());
+            Optional<Vehicle> vehOpt = vehicleRepository.findById(contract.getVehicleId());
+            if (vehOpt.isPresent()) {
+                Vehicle v = vehOpt.get();
+                StringBuilder sb = new StringBuilder();
+                if (v.getYear() != null) {
+                    sb.append(v.getYear()).append(" ");
+                }
+                if (v.getMake() != null) {
+                    sb.append(v.getMake()).append(" ");
+                }
+                if (v.getModel() != null) {
+                    sb.append(v.getModel());
+                }
+                vehicleInfo = sb.toString().trim();
+            } else {
+                vehicleInfo = "Veh #" + contract.getVehicleId();
+            }
         }
 
         Double financedAmount = contract.getLoanAmount();
@@ -189,12 +252,10 @@ public class EntityDtoMapper {
         return responseDTO;
     }
 
-    // ==========================================
-    // CUSTOMER MAPPINGS
-    // ==========================================
-
     public Customer toEntity(CustomerRequestDTO dto) {
-        if (dto == null) return null;
+        if (dto == null) {
+            return null;
+        }
         Customer customer = new Customer();
         customer.setFirstName(dto.getFirstName());
         customer.setLastName(dto.getLastName());
@@ -208,9 +269,12 @@ public class EntityDtoMapper {
     }
 
     public CustomerResponseDTO toResponseDTO(Customer customer) {
-        if (customer == null) return null;
-        String fullName = ((customer.getFirstName() != null ? customer.getFirstName() : "") + " " +
-                           (customer.getLastName() != null ? customer.getLastName() : "")).trim();
+        if (customer == null) {
+            return null;
+        }
+        String first = customer.getFirstName() != null ? customer.getFirstName() : "";
+        String last = customer.getLastName() != null ? customer.getLastName() : "";
+        String fullName = (first + " " + last).trim();
 
         CustomerResponseDTO responseDTO = new CustomerResponseDTO();
         responseDTO.setId(customer.getId());

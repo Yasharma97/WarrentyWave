@@ -1,27 +1,21 @@
-/* ==========================================================================
-   WarrantyWave Design System & Stylesheet
-   Theme: Luxurious Warm Cream & Golden Amber / Butter Yellow
-   Full Responsiveness: Mobile (<768px), Tablet (768px-1024px), Laptop/Desktop (>1024px)
-   ========================================================================== */
+
 
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
 :root {
-    /* Base Creamish Yellow Theme Colors */
+
     --bg-primary: #faf6ee;
     --bg-secondary: #f4ede0;
     --bg-card: #ffffff;
     --bg-card-hover: #fffdf8;
     --bg-glass: rgba(255, 253, 246, 0.82);
     --bg-subtle: #f7f0e3;
-    
-    /* Warm Cream & Golden Amber Borders */
+
     --border-glass: rgba(217, 168, 65, 0.28);
     --border-subtle: #e8ddc7;
     --border-card: #ede3d2;
     --border-focus: rgba(202, 138, 4, 0.55);
 
-    /* Golden Yellow & Honey Amber Brand Colors */
     --primary: #ca8a04;
     --primary-light: #fef08a;
     --primary-dark: #a16207;
@@ -32,35 +26,31 @@
     --accent-cream: #fffdf5;
     --accent-butter: #fef9c3;
     --accent-gold: #eab308;
-    
-    /* Semantic Colors Harmonized with Warm Palette */
+
     --success: #15803d;
     --success-bg: rgba(21, 128, 61, 0.12);
     --success-border: rgba(21, 128, 61, 0.3);
-    
+
     --warning: #b45309;
     --warning-bg: rgba(245, 158, 11, 0.15);
     --warning-border: rgba(245, 158, 11, 0.35);
-    
+
     --danger: #b91c1c;
     --danger-bg: rgba(239, 68, 68, 0.12);
     --danger-border: rgba(239, 68, 68, 0.3);
-    
+
     --info: #0369a1;
     --info-bg: rgba(3, 105, 161, 0.12);
     --info-border: rgba(3, 105, 161, 0.25);
 
-    /* Text Colors - Deep rich warm contrast for supreme readability */
     --text-main: #1f1b13;
     --text-muted: #5c5545;
     --text-dim: #8a806d;
     --text-inverse: #ffffff;
 
-    /* Badges & Accents */
     --badge-id-bg: #f5eedc;
     --badge-id-color: #854d0e;
 
-    /* Radii & Shadows */
     --radius-sm: 8px;
     --radius-md: 12px;
     --radius-lg: 18px;
@@ -70,11 +60,9 @@
     --shadow-hover: 0 12px 30px -4px rgba(180, 130, 40, 0.16), 0 4px 10px -2px rgba(0, 0, 0, 0.05);
     --shadow-glow: 0 0 25px var(--primary-glow);
 
-    /* Transitions */
     --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Reset & Base */
 *, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
@@ -93,7 +81,7 @@ body {
     line-height: 1.6;
     min-height: 100vh;
     overflow-x: hidden;
-    background-image: 
+    background-image:
         radial-gradient(circle at 12% 10%, rgba(254, 240, 138, 0.48) 0%, transparent 45%),
         radial-gradient(circle at 88% 88%, rgba(253, 230, 138, 0.38) 0%, transparent 50%),
         radial-gradient(circle at 50% 30%, rgba(254, 249, 195, 0.32) 0%, transparent 60%);
@@ -107,14 +95,12 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--text-main);
 }
 
-/* App Container Layout */
 .app-layout {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
 
-/* Navbar - Clean, Simple, Borderless, No Border-Radius */
 .navbar {
     background: rgba(253, 250, 243, 0.96);
     backdrop-filter: blur(18px);
@@ -179,7 +165,6 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 600;
 }
 
-/* Simple, Flat Nav Tabs (No borders, No border-radius) */
 .nav-tabs {
     display: flex;
     gap: 0.5rem;
@@ -265,7 +250,6 @@ h1, h2, h3, h4, h5, h6 {
     100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(21, 128, 61, 0); }
 }
 
-/* Main Container */
 .main-content {
     max-width: 1440px;
     margin: 0 auto;
@@ -274,7 +258,6 @@ h1, h2, h3, h4, h5, h6 {
     flex: 1;
 }
 
-/* Section Header */
 .section-header {
     display: flex;
     justify-content: space-between;
@@ -298,7 +281,6 @@ h1, h2, h3, h4, h5, h6 {
     margin-top: 0.2rem;
 }
 
-/* Metric Cards Grid */
 .metrics-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -383,7 +365,6 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 500;
 }
 
-/* Glass Card Container */
 .glass-card {
     background: var(--bg-card);
     border: 1px solid var(--border-card);
@@ -402,7 +383,6 @@ h1, h2, h3, h4, h5, h6 {
     gap: 1rem;
 }
 
-/* Controls & Inputs */
 .search-box {
     position: relative;
     min-width: 280px;
@@ -436,7 +416,6 @@ h1, h2, h3, h4, h5, h6 {
     pointer-events: none;
 }
 
-/* Filter Pills */
 .filter-group {
     display: flex;
     gap: 0.5rem;
@@ -469,7 +448,6 @@ h1, h2, h3, h4, h5, h6 {
     box-shadow: 0 2px 8px var(--primary-glow);
 }
 
-/* Buttons */
 .btn {
     display: inline-flex;
     align-items: center;
@@ -531,7 +509,6 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: var(--radius-sm);
 }
 
-/* Tables */
 .table-responsive {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
@@ -576,7 +553,6 @@ h1, h2, h3, h4, h5, h6 {
     background: rgba(250, 240, 215, 0.45);
 }
 
-/* Badges */
 .badge {
     display: inline-flex;
     align-items: center;
@@ -620,7 +596,6 @@ h1, h2, h3, h4, h5, h6 {
     display: inline-block;
 }
 
-/* Modals */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -732,7 +707,6 @@ h1, h2, h3, h4, h5, h6 {
     background: #fdfbf7;
 }
 
-/* Toast Alerts */
 .toast-container {
     position: fixed;
     bottom: 2rem;
@@ -765,7 +739,6 @@ h1, h2, h3, h4, h5, h6 {
     to { transform: translateX(0); opacity: 1; }
 }
 
-/* Empty State */
 .empty-state {
     text-align: center;
     padding: 3.5rem 1.5rem;
@@ -778,9 +751,6 @@ h1, h2, h3, h4, h5, h6 {
     opacity: 0.6;
 }
 
-/* ==========================================================================
-   Mobile Navigation & Drawer Components
-   ========================================================================== */
 .mobile-menu-btn {
     display: none;
     background: #f4ece0;
@@ -849,7 +819,6 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 700;
 }
 
-/* Mobile Bottom Navigation Dock (Phones) */
 .mobile-bottom-nav {
     display: none;
     position: fixed;
@@ -925,11 +894,6 @@ h1, h2, h3, h4, h5, h6 {
     font-style: italic;
 }
 
-/* ==========================================================================
-   BREAKPOINTS: LAPTOP, TABLET & MOBILE RESPONSIVENESS
-   ========================================================================== */
-
-/* 1. Laptops & Small Desktops (1025px - 1280px) */
 @media (max-width: 1280px) {
     .main-content {
         padding: 1.75rem 1.5rem;
@@ -944,7 +908,6 @@ h1, h2, h3, h4, h5, h6 {
     }
 }
 
-/* 2. Tablets (769px - 1024px) */
 @media (max-width: 1024px) {
     .navbar {
         padding: 0.85rem 1.5rem;
@@ -974,13 +937,12 @@ h1, h2, h3, h4, h5, h6 {
     }
 }
 
-/* 3. Phablets & Small Tablets (768px - 900px) */
 @media (max-width: 900px) {
     .navbar {
         padding: 0.75rem 1.25rem;
     }
     .nav-tabs {
-        display: none; /* Switch to hamburger drawer & bottom nav dock */
+        display: none;
     }
     .mobile-menu-btn {
         display: flex;
@@ -989,7 +951,7 @@ h1, h2, h3, h4, h5, h6 {
         display: flex;
     }
     .app-layout {
-        padding-bottom: 74px; /* Clearance for bottom navigation bar */
+        padding-bottom: 74px;
     }
     .section-header {
         flex-direction: column;
@@ -1020,7 +982,6 @@ h1, h2, h3, h4, h5, h6 {
     }
 }
 
-/* 4. Mobile Phones (up to 768px) */
 @media (max-width: 768px) {
     .main-content {
         padding: 1rem 0.85rem;
@@ -1063,8 +1024,7 @@ h1, h2, h3, h4, h5, h6 {
         font-size: 0.82rem;
         padding: 0.75rem 0.75rem;
     }
-    
-    /* Modals Responsive Bottom Sheet */
+
     .modal-overlay {
         padding: 0;
         align-items: flex-end;
@@ -1101,11 +1061,10 @@ h1, h2, h3, h4, h5, h6 {
         width: 100%;
     }
 
-    /* Toasts Responsive Position */
     .toast-container {
         left: 1rem;
         right: 1rem;
-        bottom: 5rem; /* Stays above mobile bottom nav */
+        bottom: 5rem;
     }
     .toast {
         width: 100%;
@@ -1114,7 +1073,6 @@ h1, h2, h3, h4, h5, h6 {
     }
 }
 
-/* 5. Extra Small Phones (up to 480px) */
 @media (max-width: 480px) {
     .navbar {
         padding: 0.7rem 1rem;
@@ -1128,14 +1086,14 @@ h1, h2, h3, h4, h5, h6 {
         font-size: 1.15rem;
     }
     .brand-text span {
-        display: none; /* Hide tagline on tiny phones to save space */
+        display: none;
     }
     .nav-status {
         padding: 0.35rem 0.65rem;
         font-size: 0.74rem;
     }
     .metrics-grid {
-        grid-template-columns: 1fr; /* Single column on tiny phones */
+        grid-template-columns: 1fr;
         gap: 0.85rem;
     }
     .section-title h2 {

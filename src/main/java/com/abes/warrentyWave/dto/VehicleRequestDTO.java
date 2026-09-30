@@ -3,9 +3,6 @@ package com.abes.warrentyWave.dto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 
-/**
- * Request DTO for registering or updating a Vehicle.
- */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class VehicleRequestDTO implements Serializable {
 
@@ -19,11 +16,9 @@ public class VehicleRequestDTO implements Serializable {
     private Double mileage;
     private Long customerId;
 
-    // Default Constructor
     public VehicleRequestDTO() {
     }
 
-    // Parameterized Constructor
     public VehicleRequestDTO(String vin, String make, String model, Integer year,
                              String licensePlate, Double mileage, Long customerId) {
         this.vin = vin;
@@ -35,7 +30,6 @@ public class VehicleRequestDTO implements Serializable {
         this.customerId = customerId;
     }
 
-    // Getters and Setters
     public String getVin() {
         return vin;
     }

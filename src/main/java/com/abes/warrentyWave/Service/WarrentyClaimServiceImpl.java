@@ -35,6 +35,18 @@ public class WarrentyClaimServiceImpl implements WarrentyClaimService {
     }
 
     @Override
+    public WarrantyClaimResponseDTO createClaim(WarrantyClaim claim) {
+        if (claim == null) {
+            throw new IllegalArgumentException("Warranty claim cannot be null");
+        }
+        if (claim.getStatus() == null || claim.getStatus().trim().isEmpty()) {
+            claim.setStatus("Submitted");
+        }
+        WarrantyClaim saved = warrentyClaimRepository.save(claim);
+        return mapper.toResponseDTO(saved);
+    }
+
+    @Override
     public WarrantyClaimResponseDTO getClaimById(Long id) {
         WarrantyClaim claim = warrentyClaimRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Claim not found with id: " + id));

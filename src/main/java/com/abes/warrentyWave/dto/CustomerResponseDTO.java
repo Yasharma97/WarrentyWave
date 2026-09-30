@@ -2,9 +2,6 @@ package com.abes.warrentyWave.dto;
 
 import java.io.Serializable;
 
-/**
- * Response DTO for returning customer information to clients.
- */
 public class CustomerResponseDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -20,11 +17,9 @@ public class CustomerResponseDTO implements Serializable {
     private String state;
     private String zipCode;
 
-    // Default Constructor
     public CustomerResponseDTO() {
     }
 
-    // Parameterized Constructor
     public CustomerResponseDTO(Long id, String firstName, String lastName, String email,
                                String phoneNumber, String address, String city,
                                String state, String zipCode) {
@@ -40,7 +35,6 @@ public class CustomerResponseDTO implements Serializable {
         this.zipCode = zipCode;
     }
 
-    // Getters and Setters
     public Long getId() {
         return id;
     }

@@ -4,9 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-/**
- * Request DTO for submitting or updating a Warranty Claim.
- */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class WarrantyClaimRequestDTO implements Serializable {
 
@@ -21,11 +18,9 @@ public class WarrantyClaimRequestDTO implements Serializable {
     private Double claimAmount;
     private String remarks;
 
-    // Default Constructor
     public WarrantyClaimRequestDTO() {
     }
 
-    // Parameterized Constructor
     public WarrantyClaimRequestDTO(Long customerId, Long vehicleId, Long contractId,
                                   LocalDate claimDate, String status, String description,
                                   Double claimAmount, String remarks) {
@@ -39,7 +34,6 @@ public class WarrantyClaimRequestDTO implements Serializable {
         this.remarks = remarks;
     }
 
-    // Getters and Setters
     public Long getCustomerId() {
         return customerId;
     }

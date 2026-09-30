@@ -2,9 +2,6 @@ package com.abes.warrentyWave.dto;
 
 import java.io.Serializable;
 
-/**
- * Response DTO for vehicle details returned to clients.
- */
 public class VehicleResponseDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -19,11 +16,9 @@ public class VehicleResponseDTO implements Serializable {
     private Long customerId;
     private String ownerName;
 
-    // Default Constructor
     public VehicleResponseDTO() {
     }
 
-    // Parameterized Constructor
     public VehicleResponseDTO(Long id, String vin, String make, String model,
                               Integer year, String licensePlate, Double mileage,
                               Long customerId, String ownerName) {
@@ -38,7 +33,6 @@ public class VehicleResponseDTO implements Serializable {
         this.ownerName = ownerName;
     }
 
-    // Getters and Setters
     public Long getId() {
         return id;
     }

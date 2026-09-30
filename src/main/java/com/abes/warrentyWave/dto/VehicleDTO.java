@@ -2,10 +2,6 @@ package com.abes.warrentyWave.dto;
 
 import java.io.Serializable;
 
-/**
- * Data Transfer Object for Vehicle.
- * Holds vehicle specifications and owner reference details.
- */
 public class VehicleDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -20,11 +16,9 @@ public class VehicleDTO implements Serializable {
     private Long customerId;
     private String customerName;
 
-    // Default Constructor
     public VehicleDTO() {
     }
 
-    // Parameterized Constructor
     public VehicleDTO(Long id, String vin, String make, String model, Integer year,
                       String licensePlate, Double mileage, Long customerId, String customerName) {
         this.id = id;
@@ -38,7 +32,6 @@ public class VehicleDTO implements Serializable {
         this.customerName = customerName;
     }
 
-    // Getters and Setters
     public Long getId() {
         return id;
     }

@@ -3,9 +3,6 @@ package com.abes.warrentyWave.dto;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-/**
- * Response DTO for returning Finance Contract details to clients.
- */
 public class FinanceContractResponseDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -26,11 +23,9 @@ public class FinanceContractResponseDTO implements Serializable {
     private LocalDate endDate;
     private String status;
 
-    // Default Constructor
     public FinanceContractResponseDTO() {
     }
 
-    // Parameterized Constructor
     public FinanceContractResponseDTO(Long id, String contractNumber, Long customerId,
                                      String customerName, Long vehicleId, String vehicleInfo,
                                      Double loanAmount, Double downPayment, Double financedAmount,
@@ -53,7 +48,6 @@ public class FinanceContractResponseDTO implements Serializable {
         this.status = status;
     }
 
-    // Getters and Setters
     public Long getId() {
         return id;
     }

@@ -4,9 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-/**
- * Request DTO for creating or updating a finance contract.
- */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class FinanceContractRequestDTO implements Serializable {
 
@@ -24,11 +21,9 @@ public class FinanceContractRequestDTO implements Serializable {
     private LocalDate endDate;
     private String status;
 
-    // Default Constructor
     public FinanceContractRequestDTO() {
     }
 
-    // Parameterized Constructor
     public FinanceContractRequestDTO(String contractNumber, Long customerId, Long vehicleId,
                                     Double loanAmount, Double downPayment, Double interestRate,
                                     Integer termMonths, Double monthlyPayment,
@@ -46,7 +41,6 @@ public class FinanceContractRequestDTO implements Serializable {
         this.status = status;
     }
 
-    // Getters and Setters
     public String getContractNumber() {
         return contractNumber;
     }

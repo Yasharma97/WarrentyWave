@@ -3,9 +3,6 @@ package com.abes.warrentyWave.dto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 
-/**
- * Request DTO for creating or updating a customer.
- */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CustomerRequestDTO implements Serializable {
 
@@ -20,11 +17,9 @@ public class CustomerRequestDTO implements Serializable {
     private String state;
     private String zipCode;
 
-    // Default Constructor
     public CustomerRequestDTO() {
     }
 
-    // Parameterized Constructor
     public CustomerRequestDTO(String firstName, String lastName, String email,
                               String phoneNumber, String address, String city,
                               String state, String zipCode) {
@@ -38,7 +33,6 @@ public class CustomerRequestDTO implements Serializable {
         this.zipCode = zipCode;
     }
 
-    // Getters and Setters
     public String getFirstName() {
         return firstName;
     }

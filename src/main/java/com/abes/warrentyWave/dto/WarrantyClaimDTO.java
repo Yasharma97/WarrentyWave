@@ -3,10 +3,6 @@ package com.abes.warrentyWave.dto;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-/**
- * Data Transfer Object for Warranty Claim.
- * Used for transferring warranty claim data between client and server layers.
- */
 public class WarrantyClaimDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -16,16 +12,14 @@ public class WarrantyClaimDTO implements Serializable {
     private Long vehicleId;
     private Long contractId;
     private LocalDate claimDate;
-    private String status;       // PENDING, APPROVED, REJECTED, IN_REVIEW
+    private String status;
     private String description;
     private Double claimAmount;
     private String remarks;
 
-    // Default Constructor
     public WarrantyClaimDTO() {
     }
 
-    // Parameterized Constructor
     public WarrantyClaimDTO(Long id, Long customerId, Long vehicleId, Long contractId,
                             LocalDate claimDate, String status, String description,
                             Double claimAmount, String remarks) {
@@ -40,7 +34,6 @@ public class WarrantyClaimDTO implements Serializable {
         this.remarks = remarks;
     }
 
-    // Getters and Setters
     public Long getId() {
         return id;
     }

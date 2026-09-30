@@ -3,10 +3,6 @@ package com.abes.warrentyWave.dto;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-/**
- * Data Transfer Object for Finance Contract.
- * Encapsulates financing agreement terms, payments, and statuses.
- */
 public class FinanceContractDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -22,13 +18,11 @@ public class FinanceContractDTO implements Serializable {
     private Double monthlyPayment;
     private LocalDate startDate;
     private LocalDate endDate;
-    private String status; // ACTIVE, PENDING, COMPLETED, TERMINATED
+    private String status;
 
-    // Default Constructor
     public FinanceContractDTO() {
     }
 
-    // Parameterized Constructor
     public FinanceContractDTO(Long id, String contractNumber, Long customerId, Long vehicleId,
                               Double loanAmount, Double downPayment, Double interestRate,
                               Integer termMonths, Double monthlyPayment, LocalDate startDate,
@@ -47,7 +41,6 @@ public class FinanceContractDTO implements Serializable {
         this.status = status;
     }
 
-    // Getters and Setters
     public Long getId() {
         return id;
     }

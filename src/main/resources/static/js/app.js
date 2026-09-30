@@ -1,13 +1,9 @@
-/**
- * WarrantyWave AngularJS & JavaScript Application
- * Manages Dashboard, Warranty Claims, Vehicles, Finance Contracts, and Customers.
- */
+
 
 var app = angular.module('warrantyWaveApp', []);
 
 app.controller('MainController', ['$scope', '$http', '$timeout', function($scope, $http, $timeout) {
 
-    // --- State Variables ---
     $scope.currentTab = 'dashboard';
     $scope.statusFilter = 'ALL';
     $scope.searchQuery = '';
@@ -20,7 +16,6 @@ app.controller('MainController', ['$scope', '$http', '$timeout', function($scope
     $scope.loading = false;
     $scope.toasts = [];
 
-    // Modals visibility
     $scope.modals = {
         claim: false,
         vehicle: false,
@@ -28,7 +23,6 @@ app.controller('MainController', ['$scope', '$http', '$timeout', function($scope
         customer: false
     };
 
-    // Mobile menu state
     $scope.mobileMenuOpen = false;
     $scope.toggleMobileMenu = function() {
         $scope.mobileMenuOpen = !$scope.mobileMenuOpen;
@@ -37,20 +31,17 @@ app.controller('MainController', ['$scope', '$http', '$timeout', function($scope
         $scope.mobileMenuOpen = false;
     };
 
-    // Form Models
     $scope.newClaim = {};
     $scope.newVehicle = {};
     $scope.newContract = {};
     $scope.newCustomer = {};
 
-    // --- Tab Switching ---
     $scope.setTab = function(tab) {
         $scope.currentTab = tab;
         $scope.searchQuery = '';
         $scope.mobileMenuOpen = false;
     };
 
-    // --- Toast Notification Helper ---
     $scope.showToast = function(message, type) {
         var toast = {
             id: Date.now(),
@@ -63,7 +54,6 @@ app.controller('MainController', ['$scope', '$http', '$timeout', function($scope
         }, 4000);
     };
 
-    // --- Data Fetching ---
     $scope.loadClaims = function() {
         return $http.get('/api/claims').then(function(res) {
             $scope.claims = res.data || [];
@@ -111,7 +101,6 @@ app.controller('MainController', ['$scope', '$http', '$timeout', function($scope
         });
     };
 
-    // --- Metrics Calculation ---
     $scope.metrics = {
         totalClaims: 0,
         approvedClaims: 0,
@@ -143,7 +132,6 @@ app.controller('MainController', ['$scope', '$http', '$timeout', function($scope
         $scope.metrics.totalClaimAmount = amount;
     };
 
-    // --- Claims Operations ---
     $scope.openClaimModal = function() {
         $scope.newClaim = {
             claimDate: new Date().toISOString().split('T')[0],
@@ -182,7 +170,6 @@ app.controller('MainController', ['$scope', '$http', '$timeout', function($scope
         });
     };
 
-    // --- Vehicle Operations ---
     $scope.openVehicleModal = function() {
         $scope.newVehicle = { year: new Date().getFullYear() };
         $scope.modals.vehicle = true;
@@ -208,7 +195,6 @@ app.controller('MainController', ['$scope', '$http', '$timeout', function($scope
         });
     };
 
-    // --- Finance Contract Operations ---
     $scope.openContractModal = function() {
         var randomNum = 'CON-' + Math.floor(100000 + Math.random() * 900000);
         $scope.newContract = {
@@ -239,7 +225,6 @@ app.controller('MainController', ['$scope', '$http', '$timeout', function($scope
         });
     };
 
-    // --- Customer Operations ---
     $scope.openCustomerModal = function() {
         $scope.newCustomer = {};
         $scope.modals.customer = true;
@@ -265,13 +250,11 @@ app.controller('MainController', ['$scope', '$http', '$timeout', function($scope
         });
     };
 
-    // --- Filter Helpers ---
     $scope.filterClaimsByStatus = function(claim) {
         if ($scope.statusFilter === 'ALL') return true;
         var s = (claim.status || '').toUpperCase();
         return s === $scope.statusFilter;
     };
 
-    // Initialize application data
     $scope.loadAll();
 }]);

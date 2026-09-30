@@ -6,22 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WarrantyWave | Automotive Warranty & Finance Suite</title>
     <meta name="description" content="Next-generation enterprise dashboard for managing warranty claims, vehicle fleets, finance contracts, and customers.">
-    
-    <!-- Google Fonts -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    
-    <!-- Custom Design System -->
+
     <link rel="stylesheet" href="/css/style.css">
 
-    <!-- AngularJS via CDN -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <script src="/js/app.js"></script>
 </head>
 <body ng-controller="MainController" class="app-layout">
 
-    <!-- Navigation Header -->
     <header class="navbar">
         <div class="nav-container">
             <a href="/" class="brand" id="brand-logo">
@@ -32,7 +28,6 @@
                 </div>
             </a>
 
-            <!-- Navigation Tabs (Simple & Icon-Free) -->
             <nav class="nav-tabs">
                 <button id="nav-dashboard" class="nav-tab-btn" ng-class="{'active': currentTab === 'dashboard'}" ng-click="setTab('dashboard')">
                     Dashboard
@@ -55,9 +50,8 @@
                 </button>
             </nav>
 
-            <!-- Mobile Toggle -->
             <div class="nav-actions" style="display: flex; align-items: center;">
-                <!-- Mobile Hamburger Toggle -->
+
                 <button class="mobile-menu-btn" ng-click="toggleMobileMenu()" id="btn-mobile-toggle" aria-label="Toggle Navigation">
                     <span class="bar"></span>
                     <span class="bar"></span>
@@ -66,7 +60,6 @@
             </div>
         </div>
 
-        <!-- Mobile Collapsible Navigation Drawer -->
         <div class="mobile-nav-drawer" ng-show="mobileMenuOpen">
             <button class="mobile-drawer-btn" ng-class="{'active': currentTab === 'dashboard'}" ng-click="setTab('dashboard')">
                 <span>Dashboard Overview</span>
@@ -98,12 +91,8 @@
         </div>
     </header>
 
-    <!-- Main Content Area -->
     <main class="main-content">
 
-        <!-- ========================================== -->
-        <!-- TAB 1: DASHBOARD OVERVIEW                  -->
-        <!-- ========================================== -->
         <section id="tab-dashboard" ng-show="currentTab === 'dashboard'">
             <div class="section-header">
                 <div class="section-title">
@@ -120,7 +109,6 @@
                 </div>
             </div>
 
-            <!-- Metrics Cards Grid -->
             <div class="metrics-grid">
                 <div class="metric-card">
                     <div class="metric-icon-wrap">
@@ -173,7 +161,6 @@
                 </div>
             </div>
 
-            <!-- Recent Claims Quick Table -->
             <div class="glass-card">
                 <div class="card-toolbar">
                     <h3>Recent Warranty Submissions</h3>
@@ -238,10 +225,6 @@
             </div>
         </section>
 
-
-        <!-- ========================================== -->
-        <!-- TAB 2: WARRANTY CLAIMS MANAGEMENT          -->
-        <!-- ========================================== -->
         <section id="tab-claims" ng-show="currentTab === 'claims'">
             <div class="section-header">
                 <div class="section-title">
@@ -255,13 +238,12 @@
 
             <div class="glass-card">
                 <div class="card-toolbar">
-                    <!-- Search Input -->
+
                     <div class="search-box">
                         <span class="search-icon">&#128269;</span>
                         <input type="text" class="search-input" placeholder="Search claims by ID, desc..." ng-model="claimSearch">
                     </div>
 
-                    <!-- Filter Pills -->
                     <div class="filter-group">
                         <button class="filter-pill" ng-class="{'active': statusFilter === 'ALL'}" ng-click="statusFilter = 'ALL'">All</button>
                         <button class="filter-pill" ng-class="{'active': statusFilter === 'SUBMITTED'}" ng-click="statusFilter = 'SUBMITTED'">Submitted / Pending</button>
@@ -336,10 +318,6 @@
             </div>
         </section>
 
-
-        <!-- ========================================== -->
-        <!-- TAB 3: VEHICLE FLEET MANAGEMENT           -->
-        <!-- ========================================== -->
         <section id="tab-vehicles" ng-show="currentTab === 'vehicles'">
             <div class="section-header">
                 <div class="section-title">
@@ -403,10 +381,6 @@
             </div>
         </section>
 
-
-        <!-- ========================================== -->
-        <!-- TAB 4: FINANCE CONTRACTS                   -->
-        <!-- ========================================== -->
         <section id="tab-contracts" ng-show="currentTab === 'contracts'">
             <div class="section-header">
                 <div class="section-title">
@@ -474,10 +448,6 @@
             </div>
         </section>
 
-
-        <!-- ========================================== -->
-        <!-- TAB 5: CUSTOMER DIRECTORY                  -->
-        <!-- ========================================== -->
         <section id="tab-customers" ng-show="currentTab === 'customers'">
             <div class="section-header">
                 <div class="section-title">
@@ -536,10 +506,6 @@
 
     </main>
 
-
-    <!-- ========================================== -->
-    <!-- MODAL 1: SUBMIT CLAIM                      -->
-    <!-- ========================================== -->
     <div class="modal-overlay" ng-if="modals.claim">
         <div class="modal-card">
             <div class="modal-header">
@@ -595,10 +561,6 @@
         </div>
     </div>
 
-
-    <!-- ========================================== -->
-    <!-- MODAL 2: REGISTER VEHICLE                  -->
-    <!-- ========================================== -->
     <div class="modal-overlay" ng-if="modals.vehicle">
         <div class="modal-card">
             <div class="modal-header">
@@ -646,10 +608,6 @@
         </div>
     </div>
 
-
-    <!-- ========================================== -->
-    <!-- MODAL 3: CREATE CONTRACT                   -->
-    <!-- ========================================== -->
     <div class="modal-overlay" ng-if="modals.contract">
         <div class="modal-card">
             <div class="modal-header">
@@ -701,10 +659,6 @@
         </div>
     </div>
 
-
-    <!-- ========================================== -->
-    <!-- MODAL 4: ADD CUSTOMER                      -->
-    <!-- ========================================== -->
     <div class="modal-overlay" ng-if="modals.customer">
         <div class="modal-card">
             <div class="modal-header">
@@ -755,15 +709,12 @@
         </div>
     </div>
 
-
-    <!-- Floating Toast Notifications -->
     <div class="toast-container">
         <div class="toast" ng-repeat="toast in toasts" ng-class="{'toast-success': toast.type === 'success', 'toast-error': toast.type === 'error'}">
             <span>{{ toast.message }}</span>
         </div>
     </div>
 
-    <!-- Mobile Bottom Navigation Dock (Phones) -->
     <nav class="mobile-bottom-nav">
         <button class="bottom-nav-item" ng-class="{'active': currentTab === 'dashboard'}" ng-click="setTab('dashboard')" id="bnav-dashboard">
             <span class="bnav-icon">&#9783;</span>

@@ -2,10 +2,6 @@ package com.abes.warrentyWave.dto;
 
 import java.io.Serializable;
 
-/**
- * Data Transfer Object for Customer.
- * Represents customer profile information transferred across API endpoints.
- */
 public class CustomerDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -20,11 +16,9 @@ public class CustomerDTO implements Serializable {
     private String state;
     private String zipCode;
 
-    // Default Constructor
     public CustomerDTO() {
     }
 
-    // Parameterized Constructor
     public CustomerDTO(Long id, String firstName, String lastName, String email,
                        String phoneNumber, String address, String city,
                        String state, String zipCode) {
@@ -39,7 +33,6 @@ public class CustomerDTO implements Serializable {
         this.zipCode = zipCode;
     }
 
-    // Getters and Setters
     public Long getId() {
         return id;
     }

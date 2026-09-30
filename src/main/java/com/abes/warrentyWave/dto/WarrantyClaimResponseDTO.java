@@ -3,9 +3,6 @@ package com.abes.warrentyWave.dto;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-/**
- * Response DTO for Warranty Claim details returned to clients.
- */
 public class WarrantyClaimResponseDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -22,11 +19,9 @@ public class WarrantyClaimResponseDTO implements Serializable {
     private Double claimAmount;
     private String remarks;
 
-    // Default Constructor
     public WarrantyClaimResponseDTO() {
     }
 
-    // Parameterized Constructor
     public WarrantyClaimResponseDTO(Long id, Long customerId, String customerName,
                                    Long vehicleId, String vehicleInfo, Long contractId,
                                    LocalDate claimDate, String status, String description,
@@ -44,7 +39,6 @@ public class WarrantyClaimResponseDTO implements Serializable {
         this.remarks = remarks;
     }
 
-    // Getters and Setters
     public Long getId() {
         return id;
     }
